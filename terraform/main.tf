@@ -11,7 +11,7 @@ variable "folder_id" {
 variable "yandex_zone" {
     type        = string
     description = "Зона доступности Yandex Cloud"
-    default     = "ru-central1-a"
+    default     = "ru-central1-d"
 }
 
 variable "sa_key_file_path" {
@@ -23,7 +23,7 @@ variable "sa_key_file_path" {
 terraform {
     required_providers {
         yandex = {
-            source = "yandex-cloud/yandex"
+            source  = "yandex-cloud/yandex"
         }
     }
     required_version = ">= 0.13"
