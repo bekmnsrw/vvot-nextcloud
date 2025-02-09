@@ -54,7 +54,7 @@ resource "yandex_compute_disk" "boot_disk" {
 resource "yandex_compute_instance" "server" {
     name        = var.server_name
     platform_id = "standard-v3"
-    hostname    = "ubuntu"
+    hostname    = "server"
 
     resources {
         core_fraction = 20
