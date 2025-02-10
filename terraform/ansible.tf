@@ -19,6 +19,10 @@ resource "null_resource" "add_to_known_hosts" {
 }
 
 resource "local_file" "ansible_inventory" {
+    depends_on = [ 
+        yandex_compute_instance.server,
+    ]
+    
     content = "server ansible_host=${yandex_compute_instance.server.network_interface[0].nat_ip_address} ansible_ssh_private_key_file=${var.ssh_private_key_path} ansible_user=${var.ansible_user} ansible_connection=${var.ansible_connection}"
     filename = "../ansible/inventory"
 }
