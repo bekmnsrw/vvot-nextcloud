@@ -18,10 +18,16 @@ variable "server_name" {
     default = "vvot09-server"
 }
 
-variable "ssh_key_path" {
+variable "ssh_public_key_path" {
     type        = string
-    description = "Путь к SSH-ключу для сервера"
+    description = "Путь к публичному SSH-ключу для сервера"
     default     = "~/.ssh/id_ed25519.pub"
+}
+
+variable "ssh_private_key_path" {
+    type        = string
+    description = "Путь к приватному SSH-ключу для сервера"
+    default     = "~/.ssh/id_ed25519"
 }
 
 variable "image_family_id" {
@@ -72,6 +78,6 @@ resource "yandex_compute_instance" "server" {
     }
 
     metadata = {
-        ssh-keys = "ubuntu:${file(var.ssh_key_path)}"
+        ssh-keys = "ubuntu:${file(var.ssh_public_key_path)}"
     }
 }
