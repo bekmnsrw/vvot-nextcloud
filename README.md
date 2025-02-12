@@ -3,7 +3,7 @@
 
 2) `terraform apply`
 
-3) После выполнения деплоя Nextcloud будет доступен по адресу: `<SERVER_IP_ADDRESS>/nextcloud/index.php`, где `SERVER_IP_ADDRESS` - IP-адрес сервера, который можно получить, выполнив команду `terraform output`
+3) После выполнения деплоя Nextcloud будет доступен по адресу: `<SERVER_IP_ADDRESS>/nextcloud/index.php`, где `SERVER_IP_ADDRESS` - IP-адрес сервера, который можно получить, выполнив команду `terraform output`. Либо с использованием DNS: `http://project.vvot09.itiscl.ru/nextcloud/index.php`
 
 4) `terraform destroy`
 

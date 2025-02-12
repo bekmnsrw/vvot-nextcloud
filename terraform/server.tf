@@ -35,6 +35,26 @@ variable "image_family_id" {
     default     = "ubuntu-2404-lts-oslogin"
 }
 
+variable "dns_zone" {
+    type    = string
+    default = "vvot09.itiscl.ru."
+}
+
+variable "dns_recordset_name" {
+    type    = string
+    default = "nextcloud_recordset"
+}
+
+variable "dns_zone_name" {
+    type    = string
+    default = "ru-itiscl-vvot09"
+}
+
+variable "dns_name" {
+    type    = string
+    default = "project"
+}
+
 resource "yandex_vpc_network" "network" {
     name = var.network_name
 }
@@ -80,4 +100,18 @@ resource "yandex_compute_instance" "server" {
     metadata = {
         ssh-keys = "ubuntu:${file(var.ssh_public_key_path)}"
     }
+}
+
+resource "yandex_dns_zone" "zone" {
+    zone   = var.dns_zone
+    name   = var.dns_zone_name     
+    public = true            
+}
+
+resource "yandex_dns_recordset" "recordset" {
+    zone_id = yandex_dns_zone.zone.id 
+    name    = var.dns_name                     
+    type    = "A"
+    ttl     = 300
+    data    = [yandex_compute_instance.server.network_interface[0].nat_ip_address]
 }
